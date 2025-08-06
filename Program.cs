@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace BinaryTreeImplementation
 {
@@ -164,6 +165,26 @@ namespace BinaryTreeImplementation
                 InOrderTraversal(node.Right);
             }
         }
+
+        public void LevelOrderTraversal()
+        {
+            Queue<BinaryTreeNode<T>> values = new Queue<BinaryTreeNode<T>>();
+
+            values.Enqueue(Root);
+
+            while (values.Count > 0)
+            {
+                var current = values.Dequeue();
+                Console.Write(current.Value + " ");
+
+                if (current.Left != null)
+                    values.Enqueue(current.Left);
+                
+                if (current.Right != null)
+                    values.Enqueue(current.Right);
+            }
+        }
+        
     }
 
 
@@ -194,8 +215,10 @@ namespace BinaryTreeImplementation
             Console.WriteLine("\nInorder Traversal: Left-Current-Right");
             binaryTree.InOrderTraversal();
 
-            Console.ReadKey();
+            Console.WriteLine("\nLevel-order Traversal");
+            binaryTree.LevelOrderTraversal();
 
+            Console.ReadKey();
         }
     }
 }
